@@ -3,13 +3,13 @@
 // ====================================================================================
 
 const firebaseConfig = {
-            apiKey: "AIzaSyC1FHjNtG0yLCzTAqHOiXiJBOQd7_kLOJM",
-            authDomain: "web-84026.firebaseapp.com",
-            databaseURL: "https://web-84026-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "web-84026",
-            storageBucket: "web-84026.firebasestorage.app",
-            messagingSenderId: "22249639918",
-            appId: "1:22249639918:web:f804a6fe19d9e2c7f8c8ff"
+    apiKey: "AIzaSyC1FHjNtG0yLCzTAqHOiXiJBOQd7_kLOJM", // ЗАМЕНИТЕ НА СВОЙ
+    authDomain: "web-84026.firebaseapp.com", // ЗАМЕНИТЕ НА СВОЙ
+    databaseURL: "https://web-84026-default-rtdb.asia-southeast1.firebasedatabase.app", // ЗАМЕНИТЕ НА СВОЙ
+    projectId: "web-84026", // ЗАМЕНИТЕ НА СВОЙ
+    storageBucket: "web-84026.firebasestorage.app", // ЗАМЕНИТЕ НА СВОЙ
+    messagingSenderId: "22249639918", // ЗАМЕНИТЕ НА СВОЙ
+    appId: "1:22249639918:web:f804a6fe19d9e2c7f8c8ff" // ЗАМЕНИТЕ НА СВОЙ
 };
 
 // Инициализация Firebase
