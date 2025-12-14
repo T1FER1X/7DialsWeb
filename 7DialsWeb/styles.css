@@ -1,0 +1,184 @@
+/* Общий стиль (Геоситис) */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #000080; 
+    animation: bg-flash 5s infinite alternate; 
+    padding-bottom: 50px; 
+}
+@keyframes bg-flash {
+    0% { background-color: #000080; } 
+    33% { background-color: #800080; } 
+    66% { background-color: #008080; } 
+    100% { background-color: #000080; }
+}
+* {
+    /* ✨ курсор */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewport='0 0 100 100' style='fill:black;font-size:16px;'><text y='50%'>✨</text></svg>") 16 16, auto;
+}
+/* Главный баннер обновлен */
+.header-banner {
+    background-color: #ff00ff;
+    color: #00ffff;
+    border: 5px dashed #ffff00;
+    padding: 10px;
+    text-shadow: 3px 3px 0 #000000;
+    animation: blink 1s infinite;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+@keyframes blink {
+    0% { border-color: #ffff00; }
+    50% { border-color: #ff00ff; }
+    100% { border-color: #ffff00; }
+}
+.main-wrapper {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 5px groove #c0c0c0; 
+    background-color: #008000; /* Ярко-зеленый фон */
+    min-height: 70vh;
+}
+.sidebar {
+    width: 200px;
+    background-color: #c0c0c0; /* Серый фон */
+    border-right: 3px solid #000000;
+    padding: 10px;
+    text-align: left;
+    flex-shrink: 0;
+}
+.sidebar h3 { 
+    color: #000080; 
+    border-bottom: 2px solid #000080; 
+    padding-bottom: 5px; 
+    margin-top: 0; 
+}
+.sidebar button {
+    display: block; width: 100%; margin-bottom: 8px; padding: 10px 5px;
+    background-color: #00ffff; color: #000080; border: 3px outset #000000;
+    font-weight: bold; font-size: 14px; transition: background-color 0.1s, transform 0.05s;
+}
+.sidebar button:active { transform: translateY(1px); border-style: inset; }
+.sidebar button.active { background-color: #ffff00; border-style: inset; }
+
+.main-content {
+    flex-grow: 1; padding: 20px; color: #ffffff; text-align: left;
+    text-shadow: 1px 1px 0 #000000, -1px -1px 0 #000000; /* Для лучшей читаемости */
+}
+.game-section {
+    display: none; border: 4px dashed #ff0000; padding: 15px; margin-bottom: 20px; background-color: rgba(0, 0, 0, 0.3);
+}
+.game-section.active { display: block; }
+h2 { color: #ffff00; border-bottom: 2px dotted #ffff00; padding-bottom: 5px; margin-top: 0; font-size: 24px; }
+button:not(.sidebar button) { /* Исключаем кнопки сайдбара */
+    padding: 8px 15px; margin: 5px; background-color: #ff9900; color: #000000;
+    border: 3px outset #000000; font-weight: bold; cursor: pointer;
+}
+button:not(.sidebar button):hover {
+    background-color: #ffcc00; /* Более яркий оранжевый */
+}
+
+.result {
+    margin-top: 15px; padding: 10px; border: 2px solid #ff0000;
+    background-color: #800080; color: #ffffff; font-weight: bold;
+}
+.gif-decoration { 
+    display: inline-block; margin: 0 5px; 
+    font-size: 24px; 
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+/* Стили для Крестиков-Ноликов (Мультиплеер) */
+#tictactoe-board {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    width: 240px;
+    height: 240px;
+    margin: 20px auto;
+    border: 6px solid #ffff00;
+    background-color: #008000;
+}
+.tictactoe-cell { /* Используем .tictactoe-cell как в JS */
+    border: 3px solid #ffff00; font-size: 50px; text-align: center;
+    line-height: 80px; /* Центрирование */
+    cursor: default; user-select: none; transition: background-color 0.1s;
+    background-color: #000000;
+    font-weight: bold;
+}
+.tictactoe-cell.clickable:hover { 
+    background-color: rgba(255, 255, 0, 0.2); 
+    cursor: pointer; 
+}
+.tictactoe-cell.win { background-color: #ff0000; color: #ffffff; }
+
+/* Стили для ЧАТА */
+#chat-window {
+    height: 300px;
+    border: 3px solid #00ffff;
+    overflow-y: scroll;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #000000;
+    text-align: left;
+    font-size: 14px;
+}
+.chat-message {
+    margin-bottom: 5px;
+    word-wrap: break-word;
+}
+.chat-message strong {
+    color: #ffff00;
+}
+.chat-timestamp {
+    font-size: 10px;
+    color: #808080;
+    float: right;
+}
+
+/* Рекламный баннер */
+.ad-banner {
+    position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ff0000; 
+    color: #ffff00; padding: 10px 0; font-weight: bold; font-size: 18px;
+    border-top: 5px solid #000000; text-shadow: 2px 2px 0 #000000;
+    cursor: pointer; animation: ad-move 10s infinite linear; z-index: 1000;
+}
+@keyframes ad-move {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-5%); }
+    100% { transform: translateX(0); }
+}
+/* Дополнительный стиль для Клик-Теста (Исправлено) */
+#reactionTarget {
+    width: 150px; height: 150px; line-height: 150px; text-align: center; margin: 20px auto;
+    font-size: 20px; font-weight: bold; color: #000000; 
+    border: 5px solid #000000; cursor: default; user-select: none;
+}
+#reactionTarget.wait { 
+    background-color: #ff0000; /* ЖДИ */
+    color: #ffffff; 
+    cursor: not-allowed;
+}
+#reactionTarget.go { /* КЛИКНИ! */
+    background-color: #00ff00; 
+    color: #000000; 
+    cursor: pointer;
+}
+#reactionTarget.fail { /* СЛИШКОМ РАНО! */
+    background-color: #ff00ff; 
+    color: #ffff00;
+    font-size: 16px;
+}
+#reactionTarget.success { /* УСПЕХ! */
+    background-color: #00ffff; 
+    color: #000000;
+}
