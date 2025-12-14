@@ -3,13 +3,13 @@
 // ====================================================================================
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY", // ЗАМЕНИТЕ НА СВОЙ
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com", // ЗАМЕНИТЕ НА СВОЙ
-    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com", // ЗАМЕНИТЕ НА СВОЙ
-    projectId: "YOUR_PROJECT_ID", // ЗАМЕНИТЕ НА СВОЙ
-    storageBucket: "YOUR_PROJECT_ID.appspot.com", // ЗАМЕНИТЕ НА СВОЙ
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // ЗАМЕНИТЕ НА СВОЙ
-    appId: "YOUR_APP_ID" // ЗАМЕНИТЕ НА СВОЙ
+            apiKey: "AIzaSyC1FHjNtG0yLCzTAqHOiXiJBOQd7_kLOJM",
+            authDomain: "web-84026.firebaseapp.com",
+            databaseURL: "https://web-84026-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-84026",
+            storageBucket: "web-84026.firebasestorage.app",
+            messagingSenderId: "22249639918",
+            appId: "1:22249639918:web:f804a6fe19d9e2c7f8c8ff"
 };
 
 // Инициализация Firebase
