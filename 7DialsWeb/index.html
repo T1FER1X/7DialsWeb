@@ -1,127 +1,132 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>~ * ~ 7DialsWeb: ОНЛАЙН МУЛЬТИПЛЕЕР И ЧАТ ~ * ~</title>
-    
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~ * ~ 7DialsWeb: ОНЛАЙН МУЛЬТИПЛЕЕР И ЧАТ ~ * ~</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="header-banner">
-        ! 7DIALSWEB: ОНЛАЙН СИНХРОНИЗАЦИЯ !
-    </div>
+    <div class="header-banner">
+        ! 7DIALSWEB: ОНЛАЙН СИНХРОНИЗАЦИЯ !
+    </div>
+    
+    <div class="main-wrapper">
+        
+        <aside class="sidebar">
+            <h3>Меню Игр <span class="gif-decoration">👾</span></h3>
+            <button data-target="home" class="active">🏠 Главная Страница</button>
+            <button data-target="tictactoe_game">⚔️ Онлайн Крестики-Нолики</button>
+            <button data-target="rps_game">✂️ Камень/Ножницы (Лок.)</button>
+            <button data-target="reaction_test">⚡ Клик-Тест (Лок.)</button>
+            <button data-target="online_chat">💬 Форумный Чат</button>
+            
+            <h3 style="margin-top: 15px;">Управление Звуком</h3>
+            <button id="toggleMusicButton">🔊 Вкл. Музыку</button>
+        </aside>
+        
+        <main class="main-content">
+            
+            <div id="home" class="game-section active">
+                <h2>Добро пожаловать на 7DialsWeb! <span class="gif-decoration">⭐</span></h2>
+                <p>Привет! Теперь у нас есть **Мультиплеер** и **Онлайн Чат**! Нажмите на "Онлайн Крестики-Нолики", чтобы найти игру.</p>
+                <p>Перед началом введите свой никнейм в поле ниже, он будет использоваться в чате и в игре.</p>
+                <p>
+                    <label for="userName" style="color:#ffff00;">Ваш Никнейм:</label>
+                    <input type="text" id="userName" value="Гость" style="padding: 5px; border: 2px solid #00ffff; background-color: #000000; color: #ffffff;">
+                    <button onclick="setUserName()">Сохранить</button>
+                </p>
+            </div>
+
+            <div id="tictactoe_game" class="game-section">
+                <h2>⚔️ Онлайн Крестики-Нолики</h2>
+                <p>Найдите или создайте игру, чтобы начать соревнование!</p>
+                
+                <div id="lobbyControls">
+                    <button onclick="createGame()">Создать Новую Игру</button>
+                    <button onclick="joinRandomGame()">Найти Случайную Игру</button>
+                    <input type="text" id="gameIdInput" placeholder="ID комнаты">
+                    <button onclick="joinGameById()">Войти по ID</button>
+                    <p id="currentGameInfo" class="result" style="color: #00ffff;">
+                        Статус: Не в игре.
+                    </p>
+                </div>
+                
+                <div id="gameArea" style="display: none;">
+                    <p id="playerRole" style="font-size: 18px; font-weight: bold;"></p>
+                    <div id="tictactoe-board"></div>
+                    <div id="tictactoeResult" class="result">
+                        Ожидание второго игрока...
+                    </div>
+                    <button onclick="leaveGame()">Покинуть Игру</button>
+                    <button onclick="resetGame()">Начать Заново</button>
+                </div>
+            </div>
+
+            <div id="rps_game" class="game-section">
+                <h2>✂️ Камень, Ножницы, Бумага (Локальный)</h2>
+                <p>Сыграй с компьютером! Выбери свой вариант:</p>
+                
+                <div>
+                    <button onclick="playRPS('rock')">КАМЕНЬ 👊</button>
+                    <button onclick="playRPS('paper')">БУМАГА ✋</button>
+                    <button onclick="playRPS('scissors')">НОЖНИЦЫ ✌️</button>
+                </div>
+                
+                <div id="rpsResult" class="result">
+                    Счет: Игрок 0 - Компьютер 0
+                </div>
+                <p>Последний ход: <span id="rpsLastMove">---</span></p>
+            </div>
+
+            <div id="reaction_test" class="game-section">
+                <h2>⚡ Проверь скорость КЛИКА! (Локальный)</h2>
+                <p>Нажми кнопку **"Начать"**, затем жди. Как только квадрат станет **ЗЕЛЕНЫМ**, кликни по нему максимально быстро!</p>
+                
+                <button id="reactionStartButton">Начать Тест</button>
+                
+                <div id="reactionTarget" class="wait">ЖДИ</div>
+                
+                <div id="reactionResult" class="result">
+                    Лучшее время: Н/Д
+                </div>
+            </div>
+            
+            <div id="online_chat" class="game-section">
+                <h2>💬 Онлайн Форумный Чат</h2>
+                <p>Общайтесь со всеми, кто сейчас на портале! <span style="color:#ff00ff;">(Сообщения обновляются в реальном времени!)</span></p>
+                
+                <div id="chat-window">
+                </div>
+                
+                <input type="text" id="chatInput" placeholder="Введите ваше сообщение..." style="width: 70%; padding: 8px; background-color: #ffcccc; border: 3px solid #ff0000;">
+                <button onclick="sendMessage()">Отправить</button>
+                <p style="font-size: 10px; color: #c0c0c0;">Ваш никнейм: <span id="displayUserName">Гость</span></p>
+            </div>
+
+        </main>
+    </div>
+
+    <div class="ad-banner" onclick="document.location.href='https://youtu.be/dQw4w9WgXcQ?si=1UrBcdRcMO3CrQBP'">
+        <span class="gif-decoration">💰</span> КЛИКНИ И ВЫИГРАЙ МИЛЛИОН ДОЛЛАРОВ! <span class="gif-decoration">🤑</span> <span style="color:#00ffff;">(СУПЕР-ПРЕДЛОЖЕНИЕ!)</span>
+    </div>
+
+
+    <marquee direction="left" behavior="alternate" style="color:#ffff00; font-size: 16px; margin-top: 20px;">
+        *** Добро пожаловать на 7DialsWeb! Мы ждем ваших новых рекордов! ***
+    </marquee>
     
-    <div class="main-wrapper">
-        
-        <aside class="sidebar">
-            <h3>Меню Игр <span class="gif-decoration">👾</span></h3>
-            <button data-target="home" class="active">🏠 Главная Страница</button>
-            <button data-target="tictactoe_game">⚔️ Онлайн Крестики-Нолики</button>
-            <button data-target="rps_game">✂️ Камень/Ножницы (Лок.)</button>
-            <button data-target="reaction_test">⚡ Клик-Тест (Лок.)</button>
-            <button data-target="online_chat">💬 Форумный Чат</button>
-            
-            <h3 style="margin-top: 15px;">Управление Звуком</h3>
-            <button id="toggleMusicButton">🔊 Вкл. Музыку</button>
-        </aside>
-        
-        <main class="main-content">
-            
-            <div id="home" class="game-section active">
-                <h2>Добро пожаловать на 7DialsWeb! <span class="gif-decoration">⭐</span></h2>
-                <p>Привет! Теперь у нас есть **Мультиплеер** и **Онлайн Чат**! Нажмите на "Онлайн Крестики-Нолики", чтобы найти игру.</p>
-                <p>Перед началом введите свой никнейм в поле ниже, он будет использоваться в чате и в игре.</p>
-                <p>
-                    <label for="userName" style="color:#ffff00;">Ваш Никнейм:</label>
-                    <input type="text" id="userName" value="Гость" style="padding: 5px; border: 2px solid #00ffff; background-color: #000000; color: #ffffff;">
-                    <button onclick="setUserName()">Сохранить</button>
-                </p>
-            </div>
+    <audio id="backgroundMusic" loop src="audio/retro_track.mp3"></audio>
+    <audio id="chatSound" src="audio/chat_send.mp3"></audio>
+    <audio id="clickSound" src="audio/game_click.mp3"></audio>
+    <audio id="winSound" src="audio/win_sound.mp3"></audio>
+    <audio id="loseSound" src="audio/lose_sound.mp3"></audio>
 
-            <div id="tictactoe_game" class="game-section">
-                <h2>⚔️ Онлайн Крестики-Нолики</h2>
-                <p>Найдите или создайте игру, чтобы начать соревнование!</p>
-                
-                <div id="lobbyControls">
-                    <button onclick="createGame()">Создать Новую Игру</button>
-                    <button onclick="joinRandomGame()">Найти Случайную Игру</button>
-                    <input type="text" id="gameIdInput" placeholder="ID комнаты">
-                    <button onclick="joinGameById()">Войти по ID</button>
-                    <p id="currentGameInfo" class="result" style="color: #00ffff;">
-                        Статус: Не в игре.
-                    </p>
-                </div>
-                
-                <div id="gameArea" style="display: none;">
-                    <p id="playerRole" style="font-size: 18px; font-weight: bold;"></p>
-                    <div id="tictactoe-board"></div>
-                    <div id="tictactoeResult" class="result">
-                        Ожидание второго игрока...
-                    </div>
-                    <button onclick="leaveGame()">Покинуть Игру</button>
-                    <button onclick="resetGame()">Начать Заново</button>
-                </div>
-            </div>
-
-            <div id="rps_game" class="game-section">
-                <h2>✂️ Камень, Ножницы, Бумага (Локальный)</h2>
-                <p>Сыграй с компьютером! Выбери свой вариант:</p>
-                
-                <div>
-                    <button onclick="playRPS('rock')">КАМЕНЬ 👊</button>
-                    <button onclick="playRPS('paper')">БУМАГА ✋</button>
-                    <button onclick="playRPS('scissors')">НОЖНИЦЫ ✌️</button>
-                </div>
-                
-                <div id="rpsResult" class="result">
-                    Счет: Игрок 0 - Компьютер 0
-                </div>
-                <p>Последний ход: <span id="rpsLastMove">---</span></p>
-            </div>
-
-            <div id="reaction_test" class="game-section">
-                <h2>⚡ Проверь скорость КЛИКА! (Локальный)</h2>
-                <p>Нажми кнопку **"Начать"**, затем жди. Как только квадрат станет **ЗЕЛЕНЫМ**, кликни по нему максимально быстро!</p>
-                
-                <button id="reactionStartButton">Начать Тест</button>
-                
-                <div id="reactionTarget" class="wait">ЖДИ</div>
-                
-                <div id="reactionResult" class="result">
-                    Лучшее время: Н/Д
-                </div>
-            </div>
-            
-            <div id="online_chat" class="game-section">
-                <h2>💬 Онлайн Форумный Чат</h2>
-                <p>Общайтесь со всеми, кто сейчас на портале! <span style="color:#ff00ff;">(Сообщения обновляются в реальном времени!)</span></p>
-                
-                <div id="chat-window">
-                </div>
-                
-                <input type="text" id="chatInput" placeholder="Введите ваше сообщение..." style="width: 70%; padding: 8px; background-color: #ffcccc; border: 3px solid #ff0000;">
-                <button onclick="sendMessage()">Отправить</button>
-                <p style="font-size: 10px; color: #c0c0c0;">Ваш никнейм: <span id="displayUserName">Гость</span></p>
-            </div>
-
-        </main>
-    </div>
-
-    <div class="ad-banner" onclick="document.location.href='https://youtu.be/dQw4w9WgXcQ?si=1UrBcdRcMO3CrQBP'">
-        <span class="gif-decoration">💰</span> КЛИКНИ И ВЫИГРАЙ МИЛЛИОН ДОЛЛАРОВ! <span class="gif-decoration">🤑</span> <span style="color:#00ffff;">(СУПЕР-ПРЕДЛОЖЕНИЕ!)</span>
-    </div>
-
-
-    <marquee direction="left" behavior="alternate" style="color:#ffff00; font-size: 16px; margin-top: 20px;">
-        *** Добро пожаловать на 7DialsWeb! Мы ждем ваших новых рекордов! ***
-    </marquee>
-
-    <script src="scripts.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
-
